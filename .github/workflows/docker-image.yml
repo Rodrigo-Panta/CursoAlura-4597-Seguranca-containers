@@ -23,6 +23,11 @@ jobs:
         ignore-base: false
         dockerhub-user: rodrigopanta
         dockerhub-password: ${{ secrets.DOCKERHUB_PASSWORD }}
-
-
-  
+    
+    - name: Aqua Security Trivy
+      uses: aquasecurity/trivy-action@v0.36.0
+      with:
+        image-ref: rodrigopanta/seguranca_docker:${{ github.run_number }}
+        exit-code: 1
+        severity: HIGH,CRITICAL
+        format: table
